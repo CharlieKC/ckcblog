@@ -3,6 +3,6 @@ WORKDIR /usr/app
 RUN npm install -g gatsby-cli
 
 COPY package.json .
-RUN npm install --quiet
+RUN npm install
 COPY . .
 
