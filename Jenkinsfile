@@ -1,9 +1,15 @@
 pipeline {
   agent any
   stages {
-    stage('') {
+    stage('fetch code') {
       steps {
         git 'https://github.com/CharlieKC/ckcblog.git'
+      }
+    }
+
+    stage('ls files') {
+      steps {
+        sh 'ls -a;'
       }
     }
 
