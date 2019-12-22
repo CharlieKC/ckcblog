@@ -15,7 +15,8 @@ pipeline {
 
     stage('build') {
       steps {
-        sh 'docker build .'
+        sh '''npm install;
+gatsby build;'''
       }
     }
 
