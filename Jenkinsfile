@@ -2,8 +2,19 @@ pipeline {
   agent any
   stages {
     stage('fetch code') {
-      steps {
-        git 'https://github.com/CharlieKC/ckcblog.git'
+      parallel {
+        stage('fetch code') {
+          steps {
+            git 'https://github.com/CharlieKC/ckcblog.git'
+          }
+        }
+
+        stage('install node and gatsby') {
+          steps {
+            sh 'npm -i -g gatsby-cli'
+          }
+        }
+
       }
     }
 
