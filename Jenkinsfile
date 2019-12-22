@@ -9,9 +9,15 @@ pipeline {
           }
         }
 
-        stage('install node and gatsby') {
+        stage('install environment') {
           steps {
-            sh 'npm -i -g gatsby-cli'
+            sh '''apt update;
+apt -y upgrade; 
+apt-get install curl;
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.1/install.sh | bash;
+nvm install 10;
+nvm use 10;
+npm -i -g gatsby-cli'''
           }
         }
 
