@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage('fetch code') {
       steps {
-        git 'https://github.com/CharlieKC/ckcblog.git'
+        git(url: 'https://github.com/CharlieKC/ckcblog.git', poll: true)
       }
     }
 
@@ -17,6 +17,12 @@ pipeline {
       steps {
         sh '''npm install;
 gatsby build;'''
+      }
+    }
+
+    stage('serve') {
+      steps {
+        sh 'gatsby serve -p 3000'
       }
     }
 
