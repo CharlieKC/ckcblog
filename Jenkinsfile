@@ -11,8 +11,7 @@ pipeline {
 
         stage('kill running server') {
           steps {
-            sh '''kill -9 $(lsof -t -i:3000)
-'''
+            sh 'killall node'
           }
         }
 
