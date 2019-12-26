@@ -2,24 +2,28 @@ pipeline {
   agent any
   stages {
     stage('fetch code') {
-      parallel {
-        stage('fetch code') {
-          steps {
-            git(url: 'https://github.com/CharlieKC/ckcblog.git', poll: true)
-          }
-        }
-
-        stage('kill running server') {
-          steps {
-            sh 'killall node'
-        }
-        }
+      steps {
+        git(url: 'https://github.com/CharlieKC/ckcblog.git', poll: true)
       }
     }
 
     stage('ls files') {
-      steps {
-        sh 'ls -a;'
+      parallel {
+        stage('ls files') {
+          steps {
+            sh 'ls -a;'
+          }
+        }
+
+        stage('') {
+          steps {
+            retry(count: 1) {
+              sh 'killall node'
+            }
+
+          }
+        }
+
       }
     }
 
