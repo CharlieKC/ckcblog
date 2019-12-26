@@ -22,7 +22,8 @@ gatsby build;'''
 
     stage('serve') {
       steps {
-        sh 'gatsby serve -p 3000 &'
+        sh '''gatsby serve -p 3000 &
+echo \'server running\''''
       }
     }
 
