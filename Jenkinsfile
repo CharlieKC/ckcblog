@@ -10,9 +10,14 @@ pipeline {
         }
 
         stage('kill running server') {
-          steps {
-            sh 'killall node'
-          }
+          steps
+            try {
+              sh "killall node"
+             } catch (err) {
+              echo err.getMessage()
+              echo "Error detected, but we will continue."
+             }
+
         }
 
       }
