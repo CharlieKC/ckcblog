@@ -8,22 +8,8 @@ pipeline {
     }
 
     stage('ls files') {
-      parallel {
-        stage('ls files') {
-          steps {
-            sh 'ls -a;'
-          }
-        }
-
-        stage('') {
-          steps {
-            retry(count: 1) {
-              sh 'killall node'
-            }
-
-          }
-        }
-
+      steps {
+        sh 'ls -a;'
       }
     }
 
