@@ -2,8 +2,20 @@ pipeline {
   agent any
   stages {
     stage('fetch code') {
-      steps {
-        git(url: 'https://github.com/CharlieKC/ckcblog.git', poll: true)
+      parallel {
+        stage('fetch code') {
+          steps {
+            git(url: 'https://github.com/CharlieKC/ckcblog.git', poll: true)
+          }
+        }
+
+        stage('kill running server') {
+          steps {
+            sh '''kill -9 $(lsof -t -i:3000)
+'''
+          }
+        }
+
       }
     }
 
@@ -22,7 +34,9 @@ gatsby build;'''
 
     stage('serve') {
       steps {
-        sh 'gatsby serve -p 3000'
+        sh '''gatsby serve -p 3000 &;
+sleep 3;
+disown;'''
       }
     }
 
