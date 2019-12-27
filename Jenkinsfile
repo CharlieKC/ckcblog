@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage('fetch code') {
       steps {
-        git(url: 'https://github.com/CharlieKC/ckcblog.git', poll: true)
+        git(url: 'https://github.com/CharlieKC/ckcblog.git', poll: true, credentialsId: 'git')
       }
     }
 
